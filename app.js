@@ -23,6 +23,11 @@ document.addEventListener('DOMContentLoaded', () =>{
         startBtn.classList.add('startBtn')
         startBtn.addEventListener('click', start)
         startBtn.innerText = buttonText
+        let instructions = document.createElement('div')
+        grid.appendChild(instructions)
+        instructions.classList.add('instructions')
+        instructions.innerText = 'Use the arrow keys to move the doodler. The up arrow will cancel any left and right momentum. Try to land on the platforms.'
+
     }
     
     function createDoodler() {
@@ -64,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () =>{
                 if (platform.bottom < 10) {
                     let firstPlatform = platforms[0].visual
                     firstPlatform.classList.remove('platform')
+                    grid.removeChild(firstPlatform)
                     platforms.shift()
                     score++
                     console.log(platforms)
