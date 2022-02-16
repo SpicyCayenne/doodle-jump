@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         let instructions = document.createElement('div')
         grid.appendChild(instructions)
         instructions.classList.add('instructions')
-        instructions.innerText = 'Use the arrow keys to move the doodler. The up arrow will cancel any left and right momentum. Try to land on the platforms.'
+        instructions.innerText = 'Use the arrow keys or WAD to move the doodler. W/up arrow will cancel any left and right momentum. Try to land on the platforms.'
 
     }
     
@@ -135,11 +135,11 @@ document.addEventListener('DOMContentLoaded', () =>{
     }
 
     function control(e) {
-        if (e.key === "ArrowLeft") {
+        if (e.key === "ArrowLeft" || e.key === "a") {
             moveLeft()
-        } else if (e.key === "ArrowRight") {
+        } else if (e.key === "ArrowRight" || e.key === "d") {
             moveRight()
-        } else if (e.key === "ArrowUp") {
+        } else if (e.key === "ArrowUp" || e.key === "w") {
             moveStraight()
         }
     }
