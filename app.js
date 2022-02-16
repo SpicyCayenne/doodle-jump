@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () =>{
     const grid = document.querySelector('.grid')
     const doodler = document.createElement('div')
+    const startBtn = document.createElement('button')
     let doodlerLeftSpace = 50
     let startPoint = 150
     let doodlerBottomSpace = startPoint
@@ -9,13 +10,20 @@ document.addEventListener('DOMContentLoaded', () =>{
     let platforms = []
     let upTimerId
     let downTimerId
-    let isJumping = true
+    let isJumping = false
     let isGoingLeft
     let isGoingRight
     let leftTimerId
     let rightTimerId
+    let platformTimerId
     let score = 0
     
+    function showStartButton(buttonText) {
+        grid.appendChild(startBtn)
+        startBtn.classList.add('startBtn')
+        startBtn.addEventListener('click', start)
+        startBtn.innerText = buttonText
+    }
     
     function createDoodler() {
         grid.appendChild(doodler)
@@ -53,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () =>{
                 platform.bottom -= 4
                 let visual = platform.visual
                 visual.style.bottom = platform.bottom + 'px'
-
                 if (platform.bottom < 10) {
                     let firstPlatform = platforms[0].visual
                     firstPlatform.classList.remove('platform')
@@ -68,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     }
 
     function fall() {
+        if (!isJumping) return
         clearInterval(upTimerId)
         isJumping = false
         downTimerId = setInterval(function() {
@@ -93,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     }
 
     function jump() {
+        if (isJumping) return
         clearInterval(downTimerId)
         isJumping = true
         upTimerId = setInterval(function() {
@@ -115,6 +124,8 @@ document.addEventListener('DOMContentLoaded', () =>{
         clearInterval(downTimerId)
         clearInterval(leftTimerId)
         clearInterval(rightTimerId)
+        clearInterval(platformTimerId)
+        showStartButton('Play Again')
     }
 
     function control(e) {
@@ -168,14 +179,21 @@ document.addEventListener('DOMContentLoaded', () =>{
     }
 
     function start() {
+        startPoint = doodlerBottomSpace
         if (!isGameOver) {
+            grid.removeChild(startBtn)
+            grid.innerText = ''
             createPlatforms()
             createDoodler()
-            setInterval(movePlatforms, 30)
+            platformTimerId = setInterval(movePlatforms, 30)
             jump()
             document.addEventListener('keyup', control)
+        } else {
+            isGameOver = false;
+            platforms = []
+            score = 0
+            start()
         }
     }
-    //attach to button
-    start()
+    showStartButton('Start')
 })

@@ -20,3 +20,12 @@
     background-color: green;
     position: absolute;
 }
+
+.startBtn {
+    height: 45px;
+    width: 80px;
+    position: absolute;
+    left: 160px;
+    top: 200px;
+
+}
