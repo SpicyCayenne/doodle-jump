@@ -1,36 +1,23 @@
-.grid {
-    width: 400px;
-    height: 600px;
-    background-color: yellow;
-    position: relative;
-    text-align: center;
-    font-size: 200px;
+body {
+    height: 100vh;
 }
 
-.doodler {
-    width: 60px;
-    height: 85px;
-    background-color: red;
-    position: absolute;
+.gameArea {
+    border: solid black;
+    position: relative;
+    margin: auto;
+    height: 90%;
+    width: 50%;
 }
 
 .platform {
-    width: 85px;
+    position: absolute;
     height: 15px;
     background-color: green;
-    position: absolute;
 }
 
-.startBtn {
-    height: 45px;
-    width: 80px;
+.doodler {
     position: absolute;
-    left: 160px;
-    top: 200px;
-
-}
-
-.instructions {
-    font-size: 2vmin;
-    padding: 5vmin;
+    height: 85px;
+    background-color: red;
 }
